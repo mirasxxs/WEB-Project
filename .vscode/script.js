@@ -1,36 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const popupForm = document.getElementById("popupForm");
-    const contactButton = document.getElementById("contactButton");
-    const closePopup = document.getElementById("closePopup");
-
-    contactButton.addEventListener("click", () => {
-        popupForm.style.display = "block";
-    });
-
-    closePopup.addEventListener("click", () => {
-        popupForm.style.display = "none";
-    });
-
-    document.getElementById("colorButton").addEventListener("click", () => {
-        document.body.style.backgroundColor = getRandomColor();
-    });
-
-    function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    setInterval(() => {
-        const dateTimeElement = document.getElementById("dateTime");
-        const now = new Date();
-        dateTimeElement.textContent = now.toLocaleString();
-    }, 1000);
+// Всплывающее окно
+document.getElementById("contactButton").addEventListener("click", () => {
+    document.getElementById("popupForm").style.display = "block";
 });
 
+document.getElementById("closePopup").addEventListener("click", () => {
+    document.getElementById("popupForm").style.display = "none";
+});
+
+// Валидация формы
 function validateForm() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -44,89 +21,184 @@ function validateForm() {
         errorMessage.textContent = "Passwords do not match.";
         return false;
     } else {
-        errorMessage.textContent = "";
+        errorMessage.textContent = ""; // Сброс сообщения об ошибке
         alert("Form submitted successfully!");
-        return true;
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
+        return false; // Остановить фактическую отправку формы для примера
     }
 }
 
-// Рейтинг (звездочки)
-const stars = document.querySelectorAll(".star");
-const ratingMessage = document.getElementById("ratingMessage");
+document.getElementById("colorButton").addEventListener("click", () => {
+    // Массив цветов, из которых можно выбрать
+    const colors = ["lightblue", "green", "pink", "yellow", "white", "lightcoral", "lightgreen", "lightgray"];
+    
+    // Случайный индекс из массива цветов
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    
+    // Изменяем цвет фона
+    document.body.style.backgroundColor = colors[randomIndex];
+});
 
-stars.forEach(star => {
-    star.addEventListener("click", function () {
-        stars.forEach(s => s.classList.remove("selected"));
-        this.classList.add("selected");
-        const rating = this.getAttribute("data-value");
-        ratingMessage.textContent = `Ваш рейтинг: ${rating} звезды.`;
+
+// Текущая дата и время
+function displayDateTime() {
+    const now = new Date();
+    const dateTimeString = now.toLocaleString();
+    document.getElementById("dateTime").textContent = `Current Date and Time: ${dateTimeString}`;
+}
+
+setInterval(displayDateTime, 1000);
+
+// Оценка
+document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', () => {
+        const value = star.getAttribute('data-value');
+        document.querySelectorAll('.star').forEach(s => {
+            s.classList.remove('selected');
+        });
+        star.classList.add('selected');
+        document.getElementById('ratingMessage').textContent = `Вы выбрали рейтинг: ${value} звёзд.`;
     });
 });
 
-// Изменение сообщения
-const changeMessageButton = document.getElementById("changeMessageButton");
-changeMessageButton.addEventListener("click", () => {
-    ratingMessage.textContent = "Вы нажали на кнопку и изменили сообщение!";
-});
-
-// Кнопка "Read More"
-const readMoreButton = document.getElementById("readMoreButton");
-const moreContent = document.getElementById("moreContent");
-
-readMoreButton.addEventListener("click", () => {
-    if (moreContent.style.display === "none") {
-        moreContent.style.display = "block";
-        readMoreButton.textContent = "Read Less";
-    } else {
-        moreContent.style.display = "none";
-        readMoreButton.textContent = "Read More";
-    }
-});
-
-// Переключение темы (день/ночь)
-const themeToggle = document.getElementById("themeToggle");
-themeToggle.addEventListener("click", () => {
+// Смена темы
+document.getElementById("themeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark-theme");
-    themeToggle.textContent = document.body.classList.contains("dark-theme")
-        ? "Сменить на дневную тему" 
-        : "Сменить на ночную тему";
 });
+
 // Показать текущее время
-const showTimeButton = document.getElementById("showTimeButton");
-const timeDisplay = document.getElementById("timeDisplay");
+document.getElementById("showTimeButton").addEventListener("click", () => {
+    const now = new Date();
+    document.getElementById("timeDisplay").textContent = `Текущее время: ${now.toLocaleTimeString()}`;
+});
 
-showTimeButton.addEventListener("click", () => {
+// Скрытие дополнительного контента
+document.getElementById("readMoreButton").addEventListener("click", () => {
+    const moreContent = document.getElementById("moreContent");
+    moreContent.style.display = moreContent.style.display === "none" ? "block" : "none";
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    const ratingMessage = document.getElementById('ratingMessage');
+    const changeMessageButton = document.getElementById('changeMessageButton');
+    const readMoreButton = document.getElementById('readMoreButton');
+    const moreContent = document.getElementById('moreContent');
+    const themeToggle = document.getElementById('themeToggle');
+    const showTimeButton = document.getElementById('showTimeButton');
+    const timeDisplay = document.getElementById('timeDisplay');
+
+    // Система оценок
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const ratingValue = star.dataset.value;
+            stars.forEach(s => {
+                s.classList.remove('selected');
+                // Заливаем звезды до нажатой
+                if (s.dataset.value <= ratingValue) {
+                    s.classList.add('selected');
+                }
+            });
+            ratingMessage.textContent = `Вы оценили на ${ratingValue} звезды!`;
+        });
+    });
+
+    // Кнопка «Показать сообщение»
+    changeMessageButton.addEventListener('click', () => {
+        alert(ratingMessage.textContent);
+    });
+
+    // Кнопка «Читать больше»
+    readMoreButton.addEventListener('click', () => {
+        if (moreContent.style.display === 'none') {
+            moreContent.style.display = 'block';
+            readMoreButton.textContent = 'Скрыть';
+        } else {
+            moreContent.style.display = 'none';
+            readMoreButton.textContent = 'Читать больше';
+        }
+    });
+
+    // Смена темы
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('night-theme');
+        if (document.body.classList.contains('night-theme')) {
+            themeToggle.textContent = 'Сменить на день';
+        } else {
+            themeToggle.textContent = 'Сменить на ночь';
+        }
+    });
+
+    // Показать текущее время
+    showTimeButton.addEventListener('click', () => {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        timeDisplay.textContent = `Текущее время: ${timeString}`;
+    });
+});
+
+// Обработчик события для кнопки "Показать текущее время"
+document.getElementById("timeButton").addEventListener("click", () => {
     const currentTime = new Date().toLocaleTimeString();
-    timeDisplay.textContent = `Текущее время: ${currentTime}`;
+    document.getElementById("timeDisplay").textContent = `Текущее время: ${currentTime}`;
 });
 
-// Сбросить форму
-const resetButton = document.getElementById("resetButton");
-const sampleForm = document.getElementById("sampleForm");
-
-resetButton.addEventListener("click", () => {
-    sampleForm.querySelectorAll('input').forEach(input => input.value = '');
+// Обработчик события для сброса формы
+document.getElementById("resetButton").addEventListener("click", () => {
+    document.querySelectorAll('#myForm input').forEach(input => input.value = '');
 });
 
-function changeLanguage(language) {
-    const greeting = document.getElementById("greeting");
-    const description = document.getElementById("description");
+// Обработчик события для отправки формы
+document.getElementById("myForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    alert("Форма успешно отправлена!");
+});
 
-    switch (language) {
+// Обработчик событий для навигации с помощью клавиатуры
+const navItems = document.querySelectorAll("#navMenu li");
+navItems.forEach((item, index) => {
+    item.addEventListener("keydown", (event) => {
+        switch (event.key) {
+            case "ArrowUp":
+                if (index > 0) navItems[index - 1].focus();
+                break;
+            case "ArrowDown":
+                if (index < navItems.length - 1) navItems[index + 1].focus();
+                break;
+        }
+    });
+});
+
+// Обработчик выбора языка
+document.getElementById("languageSelector").addEventListener("change", (event) => {
+    switch (event.target.value) {
         case "en":
-            greeting.textContent = "Welcome";
-            description.textContent = "This is a simple multi-language site.";
+            alert("Language switched to English!");
             break;
         case "ru":
-            greeting.textContent = "Добро пожаловать";
-            description.textContent = "Это простой многоязычный сайт.";
+            alert("Язык переключен на русский!");
             break;
-        case "kz":
-            greeting.textContent = "Қош келдіңіз";
-            description.textContent = "Бұл қарапайым көптілді сайт.";
+        case "kk":
+            alert("Тіл қазақшаға ауыстырылды!");
             break;
-        default:
-            greeting.textContent = "Welcome";
-            description.textContent = "This is a simple multi-language site.";
     }
-}
+});
+
+const playStopButton = document.getElementById("playStopButton");
+const backgroundMusic = document.getElementById("backgroundMusic");
+
+let isPlaying = false; // Переменная для отслеживания состояния воспроизведения
+
+playStopButton.addEventListener("click", () => {
+    if (isPlaying) {
+        backgroundMusic.pause(); // Остановить музыку
+        playStopButton.textContent = "Играть Музыку"; // Изменить текст кнопки
+    } else {
+        backgroundMusic.play() // Воспроизвести музыку
+            .catch(error => console.error("Ошибка воспроизведения:", error)); // Ловим ошибку, если она есть
+        playStopButton.textContent = "Остановить Музыку"; // Изменить текст кнопки
+    }
+    isPlaying = !isPlaying; // Переключить состояние
+});

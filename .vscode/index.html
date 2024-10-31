@@ -72,7 +72,6 @@
                             <img style="height:250px;" src="images/exercise.jfif" class="d-block w-100" alt="Image 3">
                         </div>
                     </div>
-
                     <button class="carousel-control-prev" data-bs-target="#carouselExampleControls" type="button" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
@@ -114,43 +113,43 @@
             <div id="dateTime" class="date-time"></div>
         </section>
     </main>
-    <div class="rating">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
+    
+    <div class="container">
+        <h1>Оцените наш сервис!</h1>
+        <div class="rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+        <p id="ratingMessage">Выберите рейтинг.</p>
+        <button id="changeMessageButton" class="btn">Показать сообщение</button>
+        <button id="readMoreButton" class="btn">Читать больше</button>
+        <p id="moreContent" style="display: none;">Это дополнительный контент, который отображается по нажатию "Читать больше".</p>
+        <button id="themeToggle" class="btn">Сменить тему</button>
+            <div>
+                <button id="showTimeButton" class="btn">Показать текущее время</button>
+            </div>   
+        <p id="timeDisplay">Текущее время: --:--:--</p>
     </div>
-    <p id="ratingMessage">Выберите рейтинг.</p>
-    <button id="changeMessageButton" class="btn">Показать сообщение</button>
-<button id="readMoreButton" class="btn">Read More</button>
-<p id="moreContent" style="display: none;">Это дополнительный контент, который отображается по нажатию "Read More".</p>
-<button id="themeToggle" class="btn">Сменить тему</button>
-<!-- Кнопка для показа времени -->
-<button id="showTimeButton" class="btn">Показать текущее время</button>
-<p id="timeDisplay">Текущее время: --:--:--</p>
 
-<!-- Форма и кнопка для сброса -->
-<form id="sampleForm">
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name">
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
-    
-    <button type="button" id="resetButton" class="btn">Сбросить форму</button>
-</form>
-<div id="languageSelector">
-    <button onclick="changeLanguage('en')">English</button>
-    <button onclick="changeLanguage('ru')">Русский</button>
-    <button onclick="changeLanguage('kz')">Қазақша</button>
-</div>
+    <div class="container">
+        
+        
+        <h2>Выбор Языка</h2>
+        <select id="languageSelector">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="kk">Қазақша</option>
+        </select>
+    </div>
 
-<div id="content">
-    <h1 id="greeting">Welcome</h1>
-    <p id="description">This is a simple multi-language site.</p>
-</div>
     
+    <button id="playStopButton">Играть Музыку</button>
+    
+    <audio id="backgroundMusic" src="audio/MOLDANAZAR – Mahabbatym.mp3" loop></audio>
+
 
     <footer class="bg-success text-white text-center py-3 mt-5">
         <p>Created by: Miras Yerseiit</p>
