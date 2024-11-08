@@ -186,19 +186,45 @@ document.getElementById("languageSelector").addEventListener("change", (event) =
     }
 });
 
-const playStopButton = document.getElementById("playStopButton");
-const backgroundMusic = document.getElementById("backgroundMusic");
+let playy = document.getElementById("play");
 
-let isPlaying = false; // Переменная для отслеживания состояния воспроизведения
-
-playStopButton.addEventListener("click", () => {
-    if (isPlaying) {
-        backgroundMusic.pause(); // Остановить музыку
-        playStopButton.textContent = "Играть Музыку"; // Изменить текст кнопки
-    } else {
-        backgroundMusic.play() // Воспроизвести музыку
-            .catch(error => console.error("Ошибка воспроизведения:", error)); // Ловим ошибку, если она есть
-        playStopButton.textContent = "Остановить Музыку"; // Изменить текст кнопки
-    }
-    isPlaying = !isPlaying; // Переключить состояние
+playy.addEventListener("click", () => {
+    let audio = new Audio("audio/MOLDANAZAR-Mahabbatym.mp3");
+audio.play()
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        window.location.href = 'signin.html?redirect=profile';
+        return;
+    }
+
+    const profileInfo = document.getElementById('profileInfo');
+    profileInfo.innerHTML = `
+        <p><strong>Username:</strong> ${currentUser.username}</p>
+        <p><strong>Email:</strong> ${currentUser.email}</p>
+    `;
+
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    const logoutButton = document.getElementById('logoutButton');
+
+});
+
+
+function updateAuthUI() {
+    const profileLink = document.getElementById('profileLink');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (profileLink) {
+        if (currentUser) {
+            profileLink.textContent = currentUser.username;
+        } else {
+            profileLink.textContent = 'Sign In';
+            profileLink.href = 'signin.html';
+        }
+    }
+}
+
+
+
