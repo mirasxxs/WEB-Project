@@ -193,38 +193,6 @@ playy.addEventListener("click", () => {
 audio.play()
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-        window.location.href = 'signin.html?redirect=profile';
-        return;
-    }
-
-    const profileInfo = document.getElementById('profileInfo');
-    profileInfo.innerHTML = `
-        <p><strong>Username:</strong> ${currentUser.username}</p>
-        <p><strong>Email:</strong> ${currentUser.email}</p>
-    `;
-
-    const darkModeSwitch = document.getElementById('darkModeSwitch');
-    const logoutButton = document.getElementById('logoutButton');
-
-});
-
-
-function updateAuthUI() {
-    const profileLink = document.getElementById('profileLink');
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    
-    if (profileLink) {
-        if (currentUser) {
-            profileLink.textContent = currentUser.username;
-        } else {
-            profileLink.textContent = 'Sign In';
-            profileLink.href = 'signin.html';
-        }
-    }
-}
 
 
 
