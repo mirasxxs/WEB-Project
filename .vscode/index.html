@@ -12,6 +12,10 @@
     <header class="bg-success text-white text-center py-3">
         <div class="container">
             <h1 class="header-title">Welcome to Healthy Living</h1>
+            <button id="themeSwitcher" class="btn btn-outline-light d-flex align-items-center">
+                <span id="themeIcon" class="me-2">🌞</span>
+                <span id="themeText">Switch to Dark Mode</span>
+            </button>
             <nav class="navbar navbar-expand-lg navbar-dark bg-success">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,13 +35,15 @@
                             <a class="nav-link" href="#sleep">Sleep</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="registr.html">Registr</a>
+                            <a class="nav-link" href="registr.html">Register</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
     </header>
+
+
 
     <main class="container mt-5">
         <section class="row">
@@ -63,7 +69,7 @@
                 <p class="paragraph-text">Quality sleep helps you recover, focus, and maintain your overall well-being. Adults need at least 7-9 hours of sleep every night.</p>
             </div>
             <div class="col-lg-4">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img style="height:250px;" src="images/shutterstock_166135529.jpg.webp" class="d-block w-100" alt="Image 1">
@@ -75,90 +81,26 @@
                             <img style="height:250px;" src="images/exercise.jfif" class="d-block w-100" alt="Image 3">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" data-bs-target="#carouselExampleControls" type="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" data-bs-target="#carouselExampleControls" type="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 </div>
             </div>
-        </section>
-
-        <section class="mt-5">
-            <h2 class="section-heading">Contact Us</h2>
-            <button id="contactButton" class="btn btn-primary">Contact Us</button>
-            <div id="popupForm" style="display:none;" class="popup">
-                <div class="popup-content">
-                    <span id="closePopup" class="close">&times;</span>
-                    <h3>Subscribe</h3>
-                    <div id="errorMessage" style="color:red;"></div>
-                    <form onsubmit="return validateForm()">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" required><br><br>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" required><br><br>
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" required><br><br>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section class="mt-5">
-            <h2 class="section-heading">Change Background Color</h2>
-            <button id="colorButton" class="btn btn-warning">Change Background Color</button>
-        </section>
-
-        <section class="mt-5">
-            <h2 class="section-heading">Current Date and Time</h2>
-            <div id="dateTime" class="date-time"></div>
         </section>
     </main>
     
-    <div class="container">
-        <h1>Оцените наш сервис!</h1>
-        <div class="rating">
-            <span class="star" data-value="1">★</span>
-            <span class="star" data-value="2">★</span>
-            <span class="star" data-value="3">★</span>
-            <span class="star" data-value="4">★</span>
-            <span class="star" data-value="5">★</span>
-        </div>
-        <p id="ratingMessage">Выберите рейтинг.</p>
-        <button id="changeMessageButton" class="btn">Показать сообщение</button>
-        <button id="readMoreButton" class="btn">Читать больше</button>
-        <p id="moreContent" style="display: none;">Это дополнительный контент, который отображается по нажатию "Читать больше".</p>
-        <button id="themeToggle" class="btn">Сменить тему</button>
-            <div>
-                <button id="showTimeButton" class="btn">Показать текущее время</button>
-            </div>   
-        <p id="timeDisplay">Текущее время: --:--:--</p>
-    </div>
-
-    <div class="container">
-        
-        
-        <h2>Выбор Языка</h2>
-        <select id="languageSelector">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-            <option value="kk">Қазақша</option>
-        </select>
-    </div>
-
-    <button id="play">Play</button>
-
-    
-   
     <footer class="bg-success text-white text-center py-3 mt-5">
         <p>Created by: Miras Yerseiit</p>
         <p>Date: September 2024</p>
         <p>Contact: mirasyerseiit@gmail.com</p>
     </footer>
-
-    <script src="script.js"></script>
+ <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-LY8BXgAf1qVXeK5gQ54T0z2dfPLdljRZ5JqVZ2U5mPmg3EAP50Pa0dDB+3HbrkL4" crossorigin="anonymous"></script>
+   
 </body>
 </html>
